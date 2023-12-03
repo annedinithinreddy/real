@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rent Property</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar {
+            background-color: #333;
+            color: white;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar img {
+            height: 40px;
+        }
+
+        .navbar-links {
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .property-details {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .property-image {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 20px;
+        }
+
+        .rent-form {
+            text-align: center;
+        }
+
+        .rent-form button {
+            padding: 10px 20px;
+            background-color: #333;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="navbar">
+        <img src="/static/images.png" alt="Logo">
+        <div class="navbar-links">
+            <a href="{{ url_for('home') }}">Home</a>
+            {% if current_user.is_authenticated %}
+            <p>Welcome, {{ current_user.username }}! <a href="{{ url_for('logout') }}">Logout</a></p>
+            {% else %}
+            <a href="{{ url_for('login') }}">Login</a>
+            <a href="{{ url_for('register') }}">Register</a>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="property-details">
+            <h2>Rent Property</h2>
+            <img class="property-image" src="{{ url_for('static', filename='1.jpg') }}" alt="Property Image">
+            <h3>{{ property[6] }}, {{ property[7] }}</h3>
+            <p>Rent: ${{ property[2] }}/month</p>
+            <p>{{ property[1] }} BHK</p>
+            <p>{{ property[3] }} sq.ft.</p>
+        </div>
+
+        <div class="rent-form">
+            <form method="post">
+                <button type="submit">Rent Now</button>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
